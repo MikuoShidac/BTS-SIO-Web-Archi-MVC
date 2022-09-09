@@ -11,6 +11,7 @@ $dotenv->load();
 // Couche Controller
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $route) {
     $route->addRoute('GET', '/', 'Quizz\Controller\HomeController');
+    $route->addRoute('GET', '/lword', 'Quizz\Controller\Questionnaire\LwordController');
     $route->addRoute('GET', '/lister', 'Quizz\Controller\Questionnaire\ListController');
     $route->addRoute('GET', '/detail/{id:\d+}', 'Quizz\Controller\Questionnaire\ViewController');
 });
