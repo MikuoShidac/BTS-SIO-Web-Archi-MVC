@@ -42,11 +42,31 @@ class EtudiantModel
         $result = $requete->fetch();
 
         $etudiant = new Etudiant();
-        $etudiant->setIdEtudiant($result["IdEtudiant"]);
-        $etudiant->setNom($result["Nom"]);
-        $etudiant->setPrenom($result["Prenom"]);
-        $etudiant->setLogin($result["Login"]);
+        $etudiant->setIdEtudiant($result["idEtudiant"]);
+        $etudiant->setNom($result["nom"]);
+        $etudiant->setPrenom($result["prenom"]);
+        $etudiant->setLogin($result["login"]);
 
         return $etudiant;
+    }
+
+    public function updateEtudiant(int $id,string $nom,string $prenom){
+        $requete = $this->bdd->prepare('UPDATE `etudiants` 
+            SET `nom` = '.$nom.', `prenom` = '.$prenom.' 
+            WHERE `etudiants`.`idEtudiant` = '. $id.';');
+        $requete->execute();
+    }
+
+    public function createEtudiant(string $login,string $nom,string $prenom,string $email,string $mdp){
+        $requete = $this->bdd->prepare('INSERT INTO etudiants 
+            (login,nom,prenom,email,mdp) 
+            VALUES('.$login.','.$nom.','.$prenom.','.$email.','.$mdp.');');
+        $requete->execute();
+    }
+
+    public function deleteEtudiant(int $id){
+        $requete=$this->bdd->prepare('DELETE FROM `etudiants` 
+            WHERE `etudiants`.`idEtudiant` ='. $id);
+        $requete->execute();
     }
 }

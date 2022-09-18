@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ etudiant.getLogin }}{% endblock %}
+
+{% block content %}
+    <h2>Modifier : {{ etudiant.getLogin }}</h2><h1></h1>
+    <div class="block">
+        <form action="data" method="post">
+            <input type="text" name="username" placeholder="pseudo" required>
+             = {{ etudiant.getLogin }}
+            <h1></h1>
+            <input type="text" name="nom" placeholder="nom" required>
+             = {{ etudiant.getNom }}
+            <h1></h1>
+            <input type="text" name="prenom" placeholder="prenom" required>
+             = {{ etudiant.getPrenom }}
+            <h1></h1>
+            <button type="submit" name="config">Confirmer les modification</button>
+        </form>
+    </div>
+{% endblock %}
