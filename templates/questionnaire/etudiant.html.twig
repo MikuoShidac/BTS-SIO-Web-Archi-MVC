@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Etudiants{% endblock %}
+
+{% block content %}
+    <h1>Liste des étudiants</h1>
+    {% for etudiant in etudiants %}
+        N°: {{ etudiant.getIdEtudiant }} Prénom: {{ etudiant.getPrenom }}
+        Nom: {{ etudiant.getNom }} Pseudo: {{ etudiant.getLogin }}
+        <a href="/modifier/{{ etudiant.getIdEtudiant }}">Modifier</a>
+        <br><br>
+    {% endfor %}
+{% endblock %}
