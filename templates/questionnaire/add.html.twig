@@ -6,22 +6,35 @@
     <h2>Créer un nouvel étudiant</h2><h1></h1>
     <div class="block">
         <form method="post">
-            Username :
+            <label>Username :</label>
             <input type="text" name="login" placeholder="pseudo" required>
             <br>
-            Nom :
+            <label>Nom :</label>
             <input type="text" name="nom" placeholder="nom" required>
             <br>
-            Prénom :
+            <label>Prénom :</label>
             <input type="text" name="prenom" placeholder="prenom" required>
             <br>
-            Adresse email :
+            <label>Adresse email :</label>
             <input type="text" name="email" placeholder="email" required>
             <br>
-            Mot de passe :
+            <label>Mot de passe :</label>
             <input type="password" name="mdp" placeholder="mot de passe" required>
             <br>
+            <label>Verification du mot de passe :</label>
+            <input type="password" name="vmdp" placeholder="verification" required>
+            <br>
+
             <button type="submit" name="creer">Créer l'étudiant</button>
         </form>
+        {% if veriflogin == true %}
+            <h1>Ce pseudo éxiste déjà</h1>
+        {% endif %}
+        {% if verifmdp == true %}
+            <h1>Les mots de passes ne sont pas identique</h1>
+        {% endif %}
+        {% if erroremail == true %}
+            <h1>Email incorrect</h1>
+        {% endif %}
     </div>
 {% endblock %}

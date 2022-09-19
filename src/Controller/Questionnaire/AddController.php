@@ -15,8 +15,7 @@ class AddController implements ControllerInterface
         if (!empty($tabInput["POST"])){
             $this->POST = $tabInput["POST"];
             $etudiantModel = new EtudiantModel();
-            $etudiantModel->createEtudiant($this->POST["login"],$this->POST["nom"],
-                $this->POST["prenom"],$this->POST["email"],$this->POST["mdp"]);
+            $etudiantModel->createEtudiant($this->POST["login"],$this->POST["nom"], $this->POST["prenom"],$this->POST["email"],$this->POST["mdp"]);
         }
     }
 
