@@ -8,6 +8,7 @@
         N°: {{ etudiant.getIdEtudiant }} Prénom: {{ etudiant.getPrenom }}
         Nom: {{ etudiant.getNom }} Pseudo: {{ etudiant.getLogin }}
         <a href="/modifier/{{ etudiant.getIdEtudiant }}">Modifier</a>
+        <br><a href="/delete/{{ etudiant.getIdEtudiant }}">Supprimer</a>
         <br><br>
     {% endfor %}
 {% endblock %}

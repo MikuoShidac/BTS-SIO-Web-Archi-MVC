@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ etudiant.getLogin }}{% endblock %}
+
+{% block content %}
+    <h2>Supprimer : {{ etudiant.getLogin }} ?</h2><h1></h1>
+    <div class="block">
+        <form method="post" action="/delete/{{ etudiant.getIdEtudiant }}">
+            Voulez-vous vraiment supprimer {{ etudiant.getIdEtudiant }} ?
+            <h1></h1>
+            <button type="submit" name="confirmer">OUI</button>
+            <a href="/etudiant">NON</a>
+        </form>
+    </div>
+{% endblock %}

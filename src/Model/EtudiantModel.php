@@ -60,15 +60,15 @@ class EtudiantModel
     }
 
     public function createEtudiant(string $login,string $nom,string $prenom,string $email,string $mdp){
-        $requete = $this->bdd->prepare('INSERT INTO etudiants 
+        $requete = $this->bdd->prepare("INSERT INTO etudiants 
             (login,nom,prenom,email,mdp) 
-            VALUES('.$login.','.$nom.','.$prenom.','.$email.','.$mdp.');');
+            VALUES('".$login."','".$nom."','".$prenom."','".$email."','".$mdp."');");
         $requete->execute();
     }
 
     public function deleteEtudiant(int $id){
-        $requete=$this->bdd->prepare('DELETE FROM `etudiants` 
-            WHERE `etudiants`.`idEtudiant` ='. $id);
+        $requete=$this->bdd->prepare('DELETE FROM etudiants 
+            WHERE idEtudiant ='. $id);
         $requete->execute();
     }
 }

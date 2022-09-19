@@ -1,0 +1,45 @@
+<?php
+
+namespace Quizz\Controller\Questionnaire;
+
+use Quizz\Core\Controller\ControllerInterface;
+use Quizz\Core\View\TwigCore;
+use Quizz\Model\EtudiantModel;
+
+class DeleteController implements ControllerInterface
+{
+    private $id;
+    private $success;
+
+    public function inputRequest(array $tabInput)
+    {
+        if (isset($tabInput["VARS"]["id"])){
+            $this->id = $tabInput["VARS"]["id"];
+        }
+        if (!empty($tabInput["POST"])){
+            $this->POST = $tabInput["POST"];
+            $etudiantModel = new EtudiantModel();
+            $etudiantModel->deleteEtudiant($this->id);
+            $this->success = true;
+        }
+    }
+
+    public function outputEvent()
+    {
+        $etudiantModel = new EtudiantModel();
+
+        if (isset($this->id)){
+            return TwigCore::getEnvironment()->render(
+                'questionnaire/delete.html.twig',[
+                    'etudiant' => $etudiantModel->getFetchId((int) $this->id)
+                ]);
+        }else{
+            return null;
+        }
+        if ($this->success == true){
+            header('Location:/etudiant');
+        }else{
+            return TwigCore::getEnvironment()->render('questionnaire/delete.html.twig');
+        }
+    }
+}
