@@ -5,17 +5,14 @@
 {% block content %}
     <h2>Modifier : {{ etudiant.getLogin }}</h2><h1></h1>
     <div class="block">
-        <form action="data" method="post">
-            <input type="text" name="username" placeholder="pseudo" required>
-             = {{ etudiant.getLogin }}
-            <h1></h1>
+        <form method="post" action="/modifier/{{ etudiant.getIdEtudiant }}">
             <input type="text" name="nom" placeholder="nom" required>
              = {{ etudiant.getNom }}
             <h1></h1>
             <input type="text" name="prenom" placeholder="prenom" required>
              = {{ etudiant.getPrenom }}
             <h1></h1>
-            <button type="submit" name="config">Confirmer les modification</button>
+            <button type="submit" name="modifier">Confirmer les modification</button>
         </form>
     </div>
 {% endblock %}

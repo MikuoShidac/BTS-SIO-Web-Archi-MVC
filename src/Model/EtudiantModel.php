@@ -53,7 +53,7 @@ class EtudiantModel
     public function updateEtudiant(int $id,string $nom,string $prenom){
         $requete = $this->bdd->prepare('UPDATE `etudiants` 
             SET `nom` = '.$nom.', `prenom` = '.$prenom.' 
-            WHERE `etudiants`.`idEtudiant` = '. $id.';');
+            WHERE `idEtudiant` = '. $id.';');
         $requete->execute();
     }
 
