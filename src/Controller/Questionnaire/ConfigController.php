@@ -20,8 +20,8 @@ class ConfigController implements ControllerInterface
         if (!empty($tabInput["POST"])){
             $this->POST = $tabInput["POST"];
             $etudiantModel = new EtudiantModel();
-            $etudiantModel->updateEtudiant($this->id,$this->POST["nom"]
-                ,$this->POST["prenom"]);
+            $etudiantModel->updateEtudiant($this->POST["nom"]
+                ,$this->POST["prenom"],$this->id);
         }
     }
 

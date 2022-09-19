@@ -50,10 +50,12 @@ class EtudiantModel
         return $etudiant;
     }
 
-    public function updateEtudiant(int $id,string $nom,string $prenom){
-        $requete = $this->bdd->prepare('UPDATE `etudiants` 
-            SET `nom` = '.$nom.', `prenom` = '.$prenom.' 
-            WHERE `idEtudiant` = '. $id.';');
+    public function updateEtudiant(string $nom,string $prenom,int $id){
+        $requete = $this->bdd->prepare(/*'Update etudiant SET nom,prenom WHERE
+                                     idEtudiant = '.$id.''*/
+            "UPDATE etudiants
+            SET nom = '".$nom."', prenom = '".$prenom."'
+            WHERE idEtudiant = ". $id.";");
         $requete->execute();
     }
 
