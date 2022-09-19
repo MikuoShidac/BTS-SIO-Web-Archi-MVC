@@ -21,6 +21,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute(['GET','POST'],'/etudiant','Quizz\Controller\Questionnaire\EtudiantController');
     $route->addRoute(['GET','POST'],'/modifier/{id:\d+}','Quizz\Controller\Questionnaire\ConfigController');
     $route->addRoute(['GET','POST'],'/delete/{id:\d+}','Quizz\Controller\Questionnaire\DeleteController');
+    $route->addRoute(['GET','POST'],'/ajouter','Quizz\Controller\Questionnaire\AddController');
 
 });
 // Dispatcher -> Couche view

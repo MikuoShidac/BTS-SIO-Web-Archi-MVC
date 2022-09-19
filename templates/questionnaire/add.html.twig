@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajout{% endblock %}
+
+{% block content %}
+    <h2>Créer un nouvel étudiant</h2><h1></h1>
+    <div class="block">
+        <form method="post">
+            Username :
+            <input type="text" name="login" placeholder="pseudo" required>
+            <br>
+            Nom :
+            <input type="text" name="nom" placeholder="nom" required>
+            <br>
+            Prénom :
+            <input type="text" name="prenom" placeholder="prenom" required>
+            <br>
+            Adresse email :
+            <input type="text" name="email" placeholder="email" required>
+            <br>
+            Mot de passe :
+            <input type="password" name="mdp" placeholder="mot de passe" required>
+            <br>
+            <button type="submit" name="creer">Créer l'étudiant</button>
+        </form>
+    </div>
+{% endblock %}
