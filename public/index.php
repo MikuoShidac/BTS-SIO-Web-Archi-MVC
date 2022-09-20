@@ -4,6 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use Quizz\Core\Controller\FastRouteCore;
+
 session_start();
 
 // Gestion des fichiers environnement
@@ -18,10 +19,10 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute('GET', '/lister', 'Quizz\Controller\Questionnaire\ListController');
     $route->addRoute('GET', '/detail/{id:\d+}', 'Quizz\Controller\Questionnaire\ViewController');
 
-    $route->addRoute(['GET','POST'],'/etudiant','Quizz\Controller\Questionnaire\EtudiantController');
-    $route->addRoute(['GET','POST'],'/modifier/{id:\d+}','Quizz\Controller\Questionnaire\ConfigController');
-    $route->addRoute(['GET','POST'],'/delete/{id:\d+}','Quizz\Controller\Questionnaire\DeleteController');
-    $route->addRoute(['GET','POST'],'/ajouter','Quizz\Controller\Questionnaire\AddController');
+    $route->addRoute(['GET','POST'],'/etudiant', 'Quizz\Controller\Etudiant\EtudiantController');
+    $route->addRoute(['GET','POST'],'/modifier/{id:\d+}', 'Quizz\Controller\Etudiant\ConfigController');
+    $route->addRoute(['GET','POST'],'/delete/{id:\d+}', 'Quizz\Controller\Etudiant\DeleteController');
+    $route->addRoute(['GET','POST'],'/ajouter', 'Quizz\Controller\Etudiant\AddController');
 
 });
 // Dispatcher -> Couche view

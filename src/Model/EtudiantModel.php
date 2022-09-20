@@ -19,7 +19,7 @@ class EtudiantModel
         //set the request and execute it
         $requete = $this->bdd->prepare('SELECT * FROM etudiants');
         $requete->execute();
-        //create an array for etudiant's data
+        //create an array for etudiants's data
         $tabEtudiants = [];
 
         foreach ($requete->fetchAll() as $value) {
@@ -51,7 +51,7 @@ class EtudiantModel
     }
 
     public function updateEtudiant(string $nom,string $prenom,int $id){
-        $requete = $this->bdd->prepare(/*'Update etudiant SET nom,prenom WHERE
+        $requete = $this->bdd->prepare(/*'Update etudiants SET nom,prenom WHERE
                                      idEtudiant = '.$id.''*/
             "UPDATE etudiants
             SET nom = '".$nom."', prenom = '".$prenom."'

@@ -1,6 +1,6 @@
 <?php
 
-namespace Quizz\Controller\Questionnaire;
+namespace Quizz\Controller\Etudiant;
 
 use Quizz\Core\Controller\ControllerInterface;
 use Quizz\Core\View\TwigCore;
@@ -31,8 +31,8 @@ class ConfigController implements ControllerInterface
 
         if (isset($this->id)){
             return TwigCore::getEnvironment()->render(
-                'questionnaire/config.html.twig',[
-                    'etudiant' => $etudiantModel->getFetchId((int) $this->id)
+                'etudiants/config.html.twig',[
+                    'etudiants' => $etudiantModel->getFetchId((int) $this->id)
                 ]);
         } else {
             return null;

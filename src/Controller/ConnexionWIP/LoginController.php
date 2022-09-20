@@ -1,11 +1,10 @@
 <?php
 
-namespace Quizz\Controller\Questionnaire;
+namespace Quizz\Controller\ConnexionWIP;
 
 use Quizz\Core\Controller\ControllerInterface;
-use Quizz\Model\questionnaireModel;
-use Quizz\Service\TwigService;
 use Quizz\Core\Service\DatabaseService;
+use Quizz\Service\TwigService;
 
 class LoginController implements ControllerInterface
 {
@@ -33,6 +32,6 @@ class LoginController implements ControllerInterface
     {
         //récupère le visuel de la page
         $twig = TwigService::getEnvironment();
-        echo $twig->render('questionnaire/login.html.twig',[]);
+        echo $twig->render('etudiants/login.html.twig',[]);
     }
 }

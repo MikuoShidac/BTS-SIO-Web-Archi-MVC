@@ -1,10 +1,10 @@
 <?php
 
-namespace Quizz\Controller\Questionnaire;
+namespace Quizz\Controller\Etudiant;
 
 use Quizz\Core\Controller\ControllerInterface;
-use Quizz\Model\EtudiantModel;
 use Quizz\Core\View\TwigCore;
+use Quizz\Model\EtudiantModel;
 
 
 class EtudiantController implements ControllerInterface
@@ -20,7 +20,7 @@ class EtudiantController implements ControllerInterface
         $etudiantModel = new EtudiantModel();
 
             return TwigCore::getEnvironment()->render(
-                'questionnaire/etudiant.html.twig',[
+                'etudiants/etudiant.html.twig',[
                 'etudiants' => $etudiantModel->getFecthAll()
             ]);
 

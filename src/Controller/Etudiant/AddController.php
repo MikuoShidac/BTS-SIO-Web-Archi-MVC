@@ -1,6 +1,6 @@
 <?php
 
-namespace Quizz\Controller\Questionnaire;
+namespace Quizz\Controller\Etudiant;
 
 use Quizz\Core\Controller\ControllerInterface;
 use Quizz\Core\View\TwigCore;
@@ -14,13 +14,15 @@ class AddController implements ControllerInterface
     {
         if (!empty($tabInput["POST"])){
             $this->POST = $tabInput["POST"];
+            $option = ['cost'=> 5];
+            $pwd = password_hash($this->POST["mdp"],PASSWORD_BCRYPT,$option);
             $etudiantModel = new EtudiantModel();
-            $etudiantModel->createEtudiant($this->POST["login"],$this->POST["nom"], $this->POST["prenom"],$this->POST["email"],$this->POST["mdp"]);
+            $etudiantModel->createEtudiant($this->POST["login"],$this->POST["nom"], $this->POST["prenom"],$this->POST["email"],$pwd);
         }
     }
 
     public function outputEvent()
     {
-        return TwigCore::getEnvironment()->render('questionnaire/add.html.twig',[]);
+        return TwigCore::getEnvironment()->render('etudiants/add.html.twig',[]);
     }
 }

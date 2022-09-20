@@ -1,6 +1,6 @@
 <?php
 
-namespace Quizz\Controller\Questionnaire;
+namespace Quizz\Controller\Etudiant;
 
 use Quizz\Core\Controller\ControllerInterface;
 use Quizz\Core\View\TwigCore;
@@ -13,6 +13,8 @@ class DeleteController implements ControllerInterface
 
     public function inputRequest(array $tabInput)
     {
+        $this->success = false;
+
         if (isset($tabInput["VARS"]["id"])){
             $this->id = $tabInput["VARS"]["id"];
         }
@@ -22,6 +24,11 @@ class DeleteController implements ControllerInterface
             $etudiantModel->deleteEtudiant($this->id);
             $this->success = true;
         }
+        if ($this->success == true){
+            header('Location:/etudiants');
+        }else{
+            return TwigCore::getEnvironment()->render('etudiants/delete.html.twig');
+        }
     }
 
     public function outputEvent()
@@ -30,16 +37,13 @@ class DeleteController implements ControllerInterface
 
         if (isset($this->id)){
             return TwigCore::getEnvironment()->render(
-                'questionnaire/delete.html.twig',[
-                    'etudiant' => $etudiantModel->getFetchId((int) $this->id)
+                'etudiants/delete.html.twig',[
+                    'etudiants' => $etudiantModel->getFetchId((int) $this->id)
                 ]);
+
         }else{
             return null;
         }
-        if ($this->success == true){
-            header('Location:/etudiant');
-        }else{
-            return TwigCore::getEnvironment()->render('questionnaire/delete.html.twig');
-        }
+
     }
 }
