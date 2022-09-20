@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  mer. 10 jan. 2018 à 23:06
--- Version du serveur :  10.1.25-MariaDB
--- Version de PHP :  7.1.7
+-- Hôte : 127.0.0.1:3306
+-- Généré le : mar. 20 sep. 2022 à 20:41
+-- Version du serveur : 5.7.36
+-- Version de PHP : 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `bddqcm`
+-- Base de données : `bddqcm`
 --
 
 -- --------------------------------------------------------
@@ -28,23 +27,30 @@ SET time_zone = "+00:00";
 -- Structure de la table `etudiants`
 --
 
-CREATE TABLE `etudiants` (
-  `idEtudiant` int(11) NOT NULL,
+DROP TABLE IF EXISTS `etudiants`;
+CREATE TABLE IF NOT EXISTS `etudiants` (
+  `idEtudiant` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(15) NOT NULL,
-  `motDePasse` smallint(15) NOT NULL,
+  `mdp` varchar(200) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `email` varchar(50) NOT NULL,
+  PRIMARY KEY (`idEtudiant`),
+  UNIQUE KEY `idEtudiant` (`idEtudiant`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `etudiants`
 --
 
-INSERT INTO `etudiants` (`idEtudiant`, `login`, `motDePasse`, `nom`, `prenom`, `email`) VALUES
-(1, 'ben', 1234, 'Alison', 'Benjamin', 'alison.benjamin@hotmail.fr'),
-(5, 'tof', 1234, 'Gand', 'Christophe', 'gand.christophe@free.fr'),
-(6, 'lulu', 1234, 'Gand', 'Lucile', 'gand.lucile@bbox.fr');
+INSERT INTO `etudiants` (`idEtudiant`, `login`, `mdp`, `nom`, `prenom`, `email`) VALUES
+(1, 'Benj', '1234', 'Liselière', 'Benjamine', 'alison.benjamin@hotmail.fr'),
+(2, 'Shidac', '#Sonic22', 'Elbaz', 'Avi', 'avie@gmail.com'),
+(3, 'lulu', '12345', 'Valentine', 'Lucias', 'luluval@gmail.com'),
+(4, 'jojo', '1234', 'Molas', 'Jonas', 'jomola@gmail.com'),
+(5, 'tof', '1234', 'Gand', 'Christophe', 'gand.christophe@free.fr'),
+(10, 'jeandu19', '123456@A', 'François', 'Jean', 'jeanfr@free.fr'),
+(12, 'RRAD', '$2y$05$cpSQhdDBr86z209stbSoRuRO.baAbaoXsnIU/0tGlsYdSP5PRvriq', 'Rodriguez', 'Ricos', 'antidiravello@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -52,11 +58,14 @@ INSERT INTO `etudiants` (`idEtudiant`, `login`, `motDePasse`, `nom`, `prenom`, `
 -- Structure de la table `qcmfait`
 --
 
-CREATE TABLE `qcmfait` (
+DROP TABLE IF EXISTS `qcmfait`;
+CREATE TABLE IF NOT EXISTS `qcmfait` (
   `idEtudiant` int(11) NOT NULL,
   `idQuestionnaire` int(11) NOT NULL,
   `dateFait` varchar(10) NOT NULL,
-  `point` int(11) NOT NULL
+  `point` int(11) NOT NULL,
+  PRIMARY KEY (`idEtudiant`,`idQuestionnaire`),
+  KEY `idQuestionnaire` (`idQuestionnaire`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -76,13 +85,15 @@ INSERT INTO `qcmfait` (`idEtudiant`, `idQuestionnaire`, `dateFait`, `point`) VAL
 -- Structure de la table `question`
 --
 
-CREATE TABLE `question` (
-  `idQuestion` int(11) NOT NULL,
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE IF NOT EXISTS `question` (
+  `idQuestion` int(11) NOT NULL AUTO_INCREMENT,
   `libelleQuestion` varchar(100) NOT NULL,
   `type` int(11) NOT NULL,
   `nbReponse` int(11) NOT NULL,
-  `nbBonneReponse` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nbBonneReponse` int(11) NOT NULL,
+  PRIMARY KEY (`idQuestion`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `question`
@@ -106,9 +117,11 @@ INSERT INTO `question` (`idQuestion`, `libelleQuestion`, `type`, `nbReponse`, `n
 -- Structure de la table `questionnaire`
 --
 
-CREATE TABLE `questionnaire` (
+DROP TABLE IF EXISTS `questionnaire`;
+CREATE TABLE IF NOT EXISTS `questionnaire` (
   `idQuestionnaire` int(11) NOT NULL,
-  `libelleQuestionnaire` varchar(100) NOT NULL
+  `libelleQuestionnaire` varchar(100) NOT NULL,
+  PRIMARY KEY (`idQuestionnaire`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -126,9 +139,12 @@ INSERT INTO `questionnaire` (`idQuestionnaire`, `libelleQuestionnaire`) VALUES
 -- Structure de la table `questionquestionnaire`
 --
 
-CREATE TABLE `questionquestionnaire` (
+DROP TABLE IF EXISTS `questionquestionnaire`;
+CREATE TABLE IF NOT EXISTS `questionquestionnaire` (
   `idQuestionnaire` int(11) NOT NULL,
-  `idQuestion` int(11) NOT NULL
+  `idQuestion` int(11) NOT NULL,
+  PRIMARY KEY (`idQuestionnaire`,`idQuestion`),
+  KEY `idQuestion` (`idQuestion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -153,11 +169,14 @@ INSERT INTO `questionquestionnaire` (`idQuestionnaire`, `idQuestion`) VALUES
 -- Structure de la table `questionreponse`
 --
 
-CREATE TABLE `questionreponse` (
+DROP TABLE IF EXISTS `questionreponse`;
+CREATE TABLE IF NOT EXISTS `questionreponse` (
   `idQuestion` int(11) NOT NULL,
   `idReponse` int(11) NOT NULL,
   `ordre` int(11) NOT NULL,
-  `bonne` int(11) NOT NULL
+  `bonne` int(11) NOT NULL,
+  PRIMARY KEY (`idQuestion`,`idReponse`),
+  KEY `idReponse` (`idReponse`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -209,11 +228,13 @@ INSERT INTO `questionreponse` (`idQuestion`, `idReponse`, `ordre`, `bonne`) VALU
 -- Structure de la table `reponse`
 --
 
-CREATE TABLE `reponse` (
-  `idReponse` int(11) NOT NULL,
+DROP TABLE IF EXISTS `reponse`;
+CREATE TABLE IF NOT EXISTS `reponse` (
+  `idReponse` int(11) NOT NULL AUTO_INCREMENT,
   `valeur` text NOT NULL,
-  `cheminImage` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cheminImage` varchar(1000) NOT NULL,
+  PRIMARY KEY (`idReponse`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `reponse`
@@ -258,75 +279,6 @@ INSERT INTO `reponse` (`idReponse`, `valeur`, `cheminImage`) VALUES
 (36, 'Budapest', ''),
 (37, 'Sofia', '');
 
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `etudiants`
---
-ALTER TABLE `etudiants`
-  ADD PRIMARY KEY (`idEtudiant`),
-  ADD UNIQUE KEY `idEtudiant` (`idEtudiant`);
-
---
--- Index pour la table `qcmfait`
---
-ALTER TABLE `qcmfait`
-  ADD PRIMARY KEY (`idEtudiant`,`idQuestionnaire`),
-  ADD KEY `idQuestionnaire` (`idQuestionnaire`);
-
---
--- Index pour la table `question`
---
-ALTER TABLE `question`
-  ADD PRIMARY KEY (`idQuestion`);
-
---
--- Index pour la table `questionnaire`
---
-ALTER TABLE `questionnaire`
-  ADD PRIMARY KEY (`idQuestionnaire`);
-
---
--- Index pour la table `questionquestionnaire`
---
-ALTER TABLE `questionquestionnaire`
-  ADD PRIMARY KEY (`idQuestionnaire`,`idQuestion`),
-  ADD KEY `idQuestion` (`idQuestion`);
-
---
--- Index pour la table `questionreponse`
---
-ALTER TABLE `questionreponse`
-  ADD PRIMARY KEY (`idQuestion`,`idReponse`),
-  ADD KEY `idReponse` (`idReponse`);
-
---
--- Index pour la table `reponse`
---
-ALTER TABLE `reponse`
-  ADD PRIMARY KEY (`idReponse`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `etudiants`
---
-ALTER TABLE `etudiants`
-  MODIFY `idEtudiant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT pour la table `question`
---
-ALTER TABLE `question`
-  MODIFY `idQuestion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT pour la table `reponse`
---
-ALTER TABLE `reponse`
-  MODIFY `idReponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- Contraintes pour les tables déchargées
 --
