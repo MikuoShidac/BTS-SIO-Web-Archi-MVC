@@ -25,7 +25,7 @@ class DeleteController implements ControllerInterface
             $this->success = true;
         }
         if ($this->success == true){
-            header('Location:/etudiants');
+            header('Location:/etudiant');
         }else{
             return TwigCore::getEnvironment()->render('etudiants/delete.html.twig');
         }
@@ -38,7 +38,7 @@ class DeleteController implements ControllerInterface
         if (isset($this->id)){
             return TwigCore::getEnvironment()->render(
                 'etudiants/delete.html.twig',[
-                    'etudiants' => $etudiantModel->getFetchId((int) $this->id)
+                    'etudiant' => $etudiantModel->getFetchId((int) $this->id)
                 ]);
 
         }else{

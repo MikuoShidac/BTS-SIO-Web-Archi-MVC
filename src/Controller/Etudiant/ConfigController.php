@@ -10,9 +10,11 @@ class ConfigController implements ControllerInterface
 {
     private $id;
     private $POST;
+    private $success;
 
     public function inputRequest(array $tabInput)
     {
+        $this->success = false;
         if (isset($tabInput["VARS"]["id"])){
             $this->id = $tabInput["VARS"]["id"];
 
@@ -22,6 +24,12 @@ class ConfigController implements ControllerInterface
             $etudiantModel = new EtudiantModel();
             $etudiantModel->updateEtudiant($this->POST["nom"]
                 ,$this->POST["prenom"],$this->id);
+            $this->success = true;
+        }
+        if ($this->success == true){
+            header('Location:/etudiant');
+        }else{
+            return TwigCore::getEnvironment()->render('etudiants/config.html.twig');
         }
     }
 
